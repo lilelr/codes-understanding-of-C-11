@@ -20,24 +20,23 @@ void mycheck(weak_ptr<int>& wp){
 
 int main() {
 
-//   shared_ptr<int> sp1(new int(22));
-//    shared_ptr<int> sp2 = sp1;
-//    weak_ptr<int> wp = sp1;
-//    cout<<*sp1<<endl;
-//    cout<<*sp2<<endl;
-//     mycheck(wp);
-//
-//    sp1.reset();
-//    cout<<*sp2<<endl;
-//    mycheck(wp);
-//
-//    sp2.reset();
-//    mycheck(wp);
+    unique_ptr<int> up1(new int(11));
+//    unique_ptr<int> up2 = up1;
 
-    int* p = new int;
-    p+=10;
-    p-=10;
-    *p = 10;
-//   get_pointer_safety()
+    cout<< *up1<<endl;
+    unique_ptr<int> up3 = move(up1);
+    cout<<*up3<<endl;
+//    cout<<*up1<<endl;
+    up3.reset();
+    up1.reset();
+//    cout<<*up3<<endl;
+    shared_ptr<int> sp1(new int(22));
+    shared_ptr<int> sp2 = sp1;
+
+    cout<<*sp1<<endl;
+    cout<<*sp2<<endl;
+    sp1.reset();
+    cout<<*sp2<<endl;
+
     return 0;
 }
