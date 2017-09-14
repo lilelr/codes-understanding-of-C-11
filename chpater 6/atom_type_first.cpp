@@ -19,7 +19,7 @@ void func(int){
     }
 }
 int main() {
-   thread t1(func,0);
+    thread t1(func,0);
     thread t2(func,0);
 
     t1.join();
