@@ -9,6 +9,7 @@
 #include <memory>
 #include <atomic>
 #include <thread>
+
 using namespace std;
 
 atomic_llong total {0};
