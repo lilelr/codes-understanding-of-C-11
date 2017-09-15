@@ -35,9 +35,12 @@ int main ()
     }else{
         cout<<"nullptr_t nptr !< nullptr"<<endl;
     }
-
+    if (sizeof(nullptr_t) == sizeof(void*)){
+        cout<<" sizeof(nullptr_t) == sizeof(void*)"<<endl;
+    }
     sizeof(nullptr);
     typeid(nullptr);
-    throw(nullptr);
+
+//    throw(nullptr);
     return 0;
 }
