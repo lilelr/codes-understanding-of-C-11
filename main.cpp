@@ -1,34 +1,52 @@
-//
-// Created by YuXiao on 18/1/2.
-//
-
-#include <pthread.h>
+#include <climits>
+#include <cassert>
 #include <iostream>
+#include <vector>
+#include <map>
+#include <string>
+#include <type_traits>
+#include <typeinfo>
+#include <memory>
+#include <atomic>
+#include <thread>
+//#include <cstdatomic>
+#include <unistd.h>
+#include <cstdlib>
+/* at_quick_exit example */
+#include <stdio.h>      /* puts */
+#include <stdlib.h>     /* at_quick_exit, quick_exit, EXIT_SUCCESS */
 using namespace std;
 
-int thread_local errorCode = 0;
-//int  errorCode = 0;
+int z;
+float c;
+void Calc(int& , int, float&, float);
 
-
-void* MaySetErr(void* input){
-    if(*(int*)input == 1){
-        errorCode = 1;
-    }else if(*(int*)input == 2){
-        errorCode = -1;
-    }else{
-        errorCode = 0;
-    }
+void TestCalc(){
+    int x,y = 3;
+    float a,b = 4.0;
+    int success = 0;
+    auto validate = [&]() -> bool
+    {
+        if((x==y+z) && (a==b+c))
+            return 1;
+        else
+            return 0;
+    };
+    Calc(x,y,a,b);
+    success += validate();
+    y=1024;
+    b=1e13;
+    Calc(x,y,a,b);
+    success += validate();
 }
 
-int main(){
-    int input_a = 1;
-    int input_b = 2;
-    pthread_t pthread1, pthread2;
-    pthread_create(&pthread1, NULL, &MaySetErr, &input_a);
-    pthread_create(&pthread2, NULL, &MaySetErr, &input_b);
+int main ()
+{
+    int a1 = 3;
+    int b1 = 4;
+    [=]{return a1+b1;};
+    auto fun1 = [&] (int c1) {b1=a1+c1;};
+    auto fun2 = [=,&b1](int c2)->int{return b1+=a1+c2;};
 
-    pthread_join(pthread2,NULL);
-    pthread_join(pthread1,NULL);
-    cout<<errorCode<<endl;
-
+    return 0;
 }

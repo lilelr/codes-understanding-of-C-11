@@ -17,9 +17,23 @@
 #include <stdlib.h>     /* at_quick_exit, quick_exit, EXIT_SUCCESS */
 using namespace std;
 
+void fun(char* p){
+    ccout<< "invoke fun(char* ) "<< endl;
+}
+
+void fun(int){
+    cout<<"invoke fun(int)"<<endl;
+}
+
+template <typename T> void g(T* t){}
+template <typename  T> void h(T t){}
+
 
 int main ()
 {
+    fun(nullptr);
+    fun(0);
+
     char* cp = nullptr;
 //    int n1 = nullptr;
 //    int n2 = reinterpret_cast<int>(nullptr);
@@ -42,5 +56,12 @@ int main ()
     typeid(nullptr);
 
 //    throw(nullptr);
+
+    g(nullptr);
+    g((float*) nullptr);
+
+    h(0);
+    h(nullptr);
+    h((float*) nullptr);
     return 0;
 }
