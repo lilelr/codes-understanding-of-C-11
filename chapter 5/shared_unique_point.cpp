@@ -38,5 +38,7 @@ int main() {
     sp1.reset();
     cout<<*sp2<<endl;
 
+    cout<<get_pointer_safety()<<endl;
+
     return 0;
 }
