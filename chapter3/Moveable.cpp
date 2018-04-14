@@ -5,6 +5,13 @@
 #include <iostream>
 using namespace std;
 
+template <class T>
+void my_swap(T& a, T& b){
+    T tmp(move(a));
+    a = move(b);
+    b = move(tmp);
+}
+
 class HugeMem{
 public:
     HugeMem(int size):sz(size > 0? size : 1){
